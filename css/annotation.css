@@ -1,0 +1,145 @@
+﻿   
+
+.annotation 
+ {
+  position: absolute;
+  width:300px;
+  color: #000;
+  background: #eeeeee;
+  border: 3px solid #999999;
+  line-height: 30px;
+  text-align: left;
+  position: absolute; 
+  padding: 2px 8px; 
+  border-radius: 6px;
+  box-shadow: 6px 6px 4px rgba(153,153,153,0.2);
+  z-index: 100;
+}
+
+ .annotation.thin {
+  width:200px;
+}
+
+ .annotation.wide {
+  width:600px;
+}
+.annotation.left:before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 100%;
+  margin-top: -12px;
+  width: 0; height: 0;
+  border-right: 12px solid #999999;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+
+}
+.annotation.left:after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 100%;
+  margin-top: -8px;
+  width: 0; height: 0;
+  border-right: 8px solid #eeeeee;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;        
+}
+
+.annotation.right:before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 100%;
+  margin-top: -12px;
+  width: 0; height: 0;
+  border-left: 12px solid #999999;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+.annotation.right:after {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 100%;
+  margin-top: -8px;
+  width: 0; height: 0;
+  border-left: 8px solid #eeeeee;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+ 
+.annotation.top:before, .annotation.topLeft:before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 18px;
+  margin-left: -12px;
+  width: 0; height: 0;
+  border-bottom: 12px solid #999999;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+}
+.annotation.top:after, .annotation.topLeft:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 18px;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 8px solid #eeeeee;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+
+ 
+.annotation.topRight:before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 18px;
+  margin-right: -12px;
+  width: 0; height: 0;
+  border-bottom: 12px solid #999999;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+}
+.annotation.topRight:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 18px;
+  margin-right: -8px;
+  width: 0; height: 0;
+  border-bottom: 8px solid #eeeeee;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+
+.annotation.bottom:before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 18px;
+  margin-right: -12px;
+  width: 0; height: 0;
+  border-top: 12px solid #999999;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+}
+.annotation.bottom:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 18px;
+  margin-right: -8px;
+  width: 0; height: 0;
+  border-top: 8px solid #eeeeee;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}   
+
+.annotation > a, .annotation > * > a {
+    cursor: pointer;
+} 

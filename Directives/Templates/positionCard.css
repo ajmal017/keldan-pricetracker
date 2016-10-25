@@ -1,0 +1,25 @@
+﻿.PositionCard   
+{
+        -moz-border-radius:    6px;
+        -webkit-border-radius: 6px;    
+    border-radius:             6px;
+    border:  1px solid Gray;
+    display: inline-block;
+    clear: none;
+    margin: 4px;
+}
+      
+      
+.TradeDescription{ text-align: left;}
+
+.RiskOrderValue{ color: Gray; font-size: x-small;}
+    
+.PositivePosition{ color: Green; text-align: left;}
+.NegativePosition{ color: red;   text-align: left;}
+
+.FirstOrderRisk{  padding-left: 12px; }
+.SecondOrderRisk{ padding-left: 24px; }
+.ThirdOrderRisk{  padding-left: 36px; }
+
+.RiskProbabilityHeader{ text-align: right; color: Gray; font-size: x-small;}
+.RiskProbability{       text-align: right; color: Gray; font-size: x-small;}

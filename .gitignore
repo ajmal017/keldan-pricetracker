@@ -1,0 +1,6 @@
+REST/
+WebSite.csproj
+Web.config
+Web.Release.config
+Web.Debug.config
+obj/

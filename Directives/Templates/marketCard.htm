@@ -1,0 +1,28 @@
+﻿ 
+  <div class="navbar-header">
+    <p class="navbar-brand" >{{market.name}}</p>
+  </div>
+
+  <div class="navbar-form navbar-left">
+    <button class="btn btn-info btn-action" data-ng-click="addOrder(false)" data-ng-disabled="newTradeBarred">Buy Long ▲ {{newLongTradeFundsNeeded|currency}}</button>
+    <div class="form-group">
+      <input class="form-control" data-ng-model="newTradeAmount"/>
+    </div>
+    <button class="btn btn-info btn-action" data-ng-click="addOrder(true)" data-ng-disabled="newTradeBarred">Sell Short ▼ {{newShortTradeFundsNeeded|currency}}</button>
+  </div>
+
+  <div class="navbar-header">
+    <a class="navbar-brand" >{{avaiableBalance|currency}}</a>
+  </div>
+
+  <div class="navbar-form navbar-right" >
+     <button type="submit" class="btn btn-success" data-ng-click="toggleTimer()">{{timerAction}}</button>
+  </div> 
+
+  <div class="navbar-form navbar-right" >
+    <span>{{market.currentPrice.date | date:'EEE d MMM yyyy'}}</span>
+  </div>    
+
+
+
+

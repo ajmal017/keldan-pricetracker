@@ -1,0 +1,19 @@
+﻿@import url('//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css');
+
+.HistoryChart {
+    background-color: #2E3338 !important;
+}
+.HistoryBack {
+    fill: #2E3338 !important;
+} 
+.annotation 
+{
+    box-shadow: 0px 0px 0px !important;
+}
+.annotation > a, .annotation > * > a {
+    color: #428AC9 !important;
+}  
+.PositivePosition 
+{
+    color: #45B845 !important; 
+}

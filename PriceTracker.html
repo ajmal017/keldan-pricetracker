@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" >
+<head>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Price Tracker</title>
+
+  <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"              type="text/ecmascript"></script>--> 
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"        type="text/ecmascript"></script> 
+  <script src="http://d3js.org/d3.v3.min.js"                                                 type="text/ecmascript"  charset="utf-8"></script>
+  
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"               type="text/css" rel="stylesheet" />  
+  <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap-theme.min.css"     type="text/css" rel="stylesheet" />-->
+
+  <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/cyborg/bootstrap.min.css"       type="text/css" rel="stylesheet" />-->
+  <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css"       type="text/css" rel="stylesheet" />-->
+  <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/superhero/bootstrap.min.css"    type="text/css" rel="stylesheet" />-->
+  <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css"         type="text/css" rel="stylesheet" />-->
+
+  <!--
+  <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css"        type="text/css" rel="stylesheet" />
+  <style>
+  
+    .HistoryChart {
+        background-color: #2E3338 !important;
+    }
+    .HistoryBack {
+        fill: #2E3338 !important;
+    } 
+    .annotation 
+    {
+        box-shadow: 0px 0px 0px !important;
+    }
+    .annotation > a, .annotation > * > a {
+        color: #428AC9 !important;
+    }  
+    .PositivePosition 
+    {
+        color: #45B845 !important; 
+    }
+
+  </style>
+  -->
+  
+  <link href="css/annotation.css"                       type="text/css" rel="stylesheet" />
+
+  <script src="modules/mainModule.js"                   type="text/ecmascript"></script>
+
+  <script src="factories/MarketDataFactory.js"          type="text/ecmascript"></script>
+  <script src="factories/TradeFactory.js"               type="text/ecmascript"></script>
+  <script src="factories/PositionFactory.js"            type="text/ecmascript"></script>
+  
+  <script src="services/marketsService.js"              type="text/ecmascript"></script>
+  
+  <script src="controllers/marketDataController.js"     type="text/ecmascript"></script>
+
+  <script src="directives/positionCard.js"              type="text/ecmascript"></script>
+  <script src="directives/marketCard.js"                type="text/ecmascript"></script>
+  <script src="directives/openOrdersListing.js"         type="text/ecmascript"></script>
+  <script src="directives/openSalesListing.js"          type="text/ecmascript"></script>
+  <script src="directives/longTradeListing.js"          type="text/ecmascript"></script>
+  <script src="directives/shortTradeListing.js"         type="text/ecmascript"></script>
+  <script src="directives/profitListing.js"             type="text/ecmascript"></script>
+  <script src="directives/marketHistory.js"             type="text/ecmascript"></script>
+  <script src="directives/positionOverview.js"          type="text/ecmascript"></script>
+                                                        
+  <script src="filters/positiveStyle.js"                type="text/ecmascript"></script>
+  <script src="filters/shortMarker.js"                  type="text/ecmascript"></script>
+  <script src="filters/reverseOrder.js"                 type="text/ecmascript"></script>
+
+  <!--<link href="directives/templates/positionCard.css" rel="stylesheet" type="text/css" />-->
+
+  <style>
+
+    body, html{
+        height: 100%;
+        padding: 6px;
+        overflow-x: hidden;
+    }
+
+    .no-border {
+      
+        border:     none; 
+        background: none; 
+        outline:    none; 
+    }
+
+    .table td { 
+          border: none !important; 
+      }
+       
+    .row{ margin-top: 16px !important; }
+
+    .btn-action{min-width: 180px !important;  }
+
+  </style>
+</head>
+
+<body data-ng-app="mainModule">
+
+<div id="divMarketDataController" data-ng-controller="marketDataController" >
+
+    <nav class="navbar navbar-default" role="navigation">  
+      <ui-market-card />
+    </nav>  
+
+    <div class="row">  
+        <div class="col-md-10">
+          <ui-market-history />
+        </div>
+        <div class="col-md-2">
+          <ui-position-overview />
+        </div>
+    </div>
+
+    <div class="row">  
+        <div class="col-md-6">
+          <ui-long-trade-listing />
+        </div>            
+        <div class="col-md-6">
+          <ui-short-trade-listing />
+        </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <ui-open-orders-listing />
+      </div>
+      <div class="col-md-3">
+        <ui-open-sales-listing />
+      </div>
+       
+      <div class="col-md-6">
+        <x-ui-profit-listing />
+      </div>
+    </div>
+
+    <div class="annotation topRight" data-ng-show="showHelp[0]" style="top: 70px; right: 40px; min-height: 125px;" >
+      <h3>It's 1951</h3>
+      <p>Press the button to start time flowing. Then place an order. If things move to quick you can always stop time and have a think.</p>
+      <a data-ng-click="nextHelp()">Next</a>
+    </div>
+
+    <div class="annotation topLeft" data-ng-show="showHelp[1]" style="top: 66px; left: 110px; min-height: 125px;">
+      <h3>Buy</h3>
+      <p>Click this button to buy shares.</p>
+      <p>The dollar amount tells you how much you need to have in your account to buy these shares.</p>
+      <p>If you don't have enough, this button will be disabled, in that case reduce the number of shares you want to buy.</p>
+      <a data-ng-click="nextHelp()">Next</a>
+    </div>     
+    
+    <div class="annotation topRight" data-ng-show="showHelp[2]" style="top: 66px; left: 40px; min-height: 125px;">
+      <h3>Number of shares</h3>
+      <p>This is the number of shares you want to buy or sell.</p>
+      <p>Be awere, the shares will be bought or sold at the next possible opportunity.</p> 
+      <p>The will be normaly first thing the next day, and the price you get will be the market price the next morning, not the time you place the order.</p>
+      <a data-ng-click="nextHelp()">Next</a>
+    </div> 
+    
+    <div class="annotation top wide" data-ng-show="showHelp[3]" style="top: 66px; left: 480px; min-height: 125px;">
+      <h3>Sell</h3>
+      <p>Click this button to sell shares.</p>
+      <p> How can I sell somthing I don't have? <a data-ng-click="nextHelp()">Learn More</a></p>
+    </div> 
+
+     <div class="annotation wide" data-ng-show="showHelp[4]" style="top: 120px; left: 200px; min-height: 125px;">
+      <h3>How can I sell somthing I don't have?</h3>
+      <p>As a trader are not buying or selling anything. When you press the sell button you are making promising to sell somthing at a later date. This is usaily at the end of the month.</p> 
+      <p>You can prommis to sell somthing you dont have, so long as by the time comes to make that sale you balance it out with promise to buy an equal amount of those shares from the market.</p>
+      <p>This is called "Closing Your Position"</p>
+      <p>If the price has gone down you get the difference in the two prices, otherwise you have to pay the difference.</p>
+      <p>At the end of the month, any positions you have open get rolled over into the next contract for delivery at the end of the following month.</p>
+      <a data-ng-click="nextHelp()">Next</a>
+    </div> 
+
+    <div class="annotation bottom" data-ng-show="showHelp[5]" style="top: 300px; right: 80px; min-height: 125px;">
+      <h3>Balance</h3>
+      <p>You've been given $5000 to start with, see if you can turn it into a million.</p>
+      <p>Each time you make a trade the market will charge you $2 commision.</p>
+      <p>Remember to press the start button in the top right corner to start time flowing. Then place an order. If things move to quick you can always stop time and have a think.</p>
+      <a data-ng-click="hideHelp()">Thats all the help for now</a>
+    </div> 
+
+    <div class="annotation right" data-ng-show="showHelp[6]" style="top: 320px; right: 240px; min-height: 125px;">
+      <h3>Trading Stops</h3>
+      <p>The market now offers you trading stops, these automaticly close your position when you have made or lost a certain amount.</p>
+      <p>Using stops will improve your performance, as you only now have to concentrate on entering the market.</p>
+      <p>At this stage of your trading carierr, a good pair of stops are $200 profit and $100 loss.</p>
+      <a data-ng-click="hideHelp()">Thats all the help for now</a>
+    </div> 
+
+    <div class="annotation right" data-ng-show="showHelp[7]" style="top: 140px; right: 240px; min-height: 125px;">
+      <h3>Gearing</h3>
+      <p>Up to now you have only been able to buy or sell shares to the value of your balance.</p>
+      <p>However the market thinks you are a reliable trader, so you will be able to buy shares up to 5 times the amount you have in your balance.</p>
+      <p>Your can now buy 1,000 shares instead of 200 with your balance of $5000.</p>
+      <a data-ng-click="hideHelp()">Thats all the help for now</a>
+    </div> 
+
+</div>  
+
+
+
+<script type="text/ecmascript">
+
+  var newCSS;
+  var theme;
+
+  var path = window.location.href.split('?');
+
+  if (path.length >= 2) {
+      
+    if (path[1].indexOf('slate')  > 0) {
+
+       theme = 'slate';
+    }
+
+  }
+
+  
+  angular.element(document).ready(function() {
+
+    var search = window.location.search;
+    var type;
+    var game;
+    var theme;
+    var newCSS;
+
+    if (search.indexOf('theme=slate') > 0) {theme = 'slate'};
+    
+    if (search.indexOf('type=large' ) > 0) {type = 'large'};
+    if (search.indexOf('type=late'  ) > 0) {type = 'late' };
+    if (search.indexOf('type=small' ) > 0) {type = 'small'};
+
+    if (search.indexOf('game=quick' ) > 0) {game = 'quick'};
+
+    var scope = angular.element(document.querySelector('#divMarketDataController')).scope();
+
+    if (game === 'quick'){
+
+      scope.setGameBreaks(['1951-08', '1951-09']);
+    
+    } else {
+
+
+      scope.setGameBreaks(['1951-12', '1952-08']);
+
+    }
+
+    scope.$apply(function(){
+    
+        if (! type) {
+        
+            scope.showHelp[0] = true;
+        
+        }
+
+    });  
+
+    if (theme === 'slate') {
+
+      newCSS = document.createElement('link');
+  
+      newCSS.setAttribute('rel',   'stylesheet'           );
+      newCSS.setAttribute('type',  'text/css'             );
+      newCSS.setAttribute('href',  './css/slateOverride.css');
+
+    }
+
+    if (newCSS){
+      
+      document.getElementsByTagName("head")[0].appendChild(newCSS) ;
+
+    }
+
+    scope.loadPosition('SP500', 5000.00, type);      
+
+  });
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //bootstrap replacment function
+  function toggleVisibility(ref, source){
+
+    var element = document.getElementById(ref);
+
+    var COLLAPSE =  ' collapse ';
+    var ICON     =  ' glyphicon ';
+    var MINUS    =  ' glyphicon-minus-sign ';
+    var PLUS     =  ' glyphicon-plus-sign ';
+
+    var s = ' ' + element.className + ' ';
+
+    if (s.indexOf(COLLAPSE) > -1){
+      element.className = s.replace(COLLAPSE," "); 
+    }else {
+      element.className = s + COLLAPSE; 
+    }
+
+    if ((source) && (source.className.indexOf(ICON) > -1)) {
+
+      s =  ' ' + source.className + ' ';
+
+      if (s.indexOf(PLUS) > -1){
+        source.className = s.replace(PLUS," ") +  MINUS; 
+      } else if (s.indexOf(MINUS) > -1){
+        source.className = s.replace(MINUS," ") +  PLUS; 
+      }
+    }
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+</script>
+
+</body>
+</html>
+
+

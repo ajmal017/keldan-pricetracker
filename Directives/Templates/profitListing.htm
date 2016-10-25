@@ -1,0 +1,38 @@
+﻿<div class="panel-group" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class=" pull-right btn-sm top-right no-border glyphicon glyphicon-minus-sign"  onclick="toggleVisibility('divProfits', this)" style="cursor: pointer"></div>
+      <h4 class="panel-title">Profit &amp; Loss <small>&#40;Commision {{position.commision|currency}} per trade&#41;</small></h4>
+    </div>
+    <div id="divProfits" class="panel-collapse  ">
+      <div class="panel-body">
+
+        <table class="table table-condensed " >              
+          <thead>
+            <tr>
+              <th>Amount</th> 
+              <th>Opened Date</th> 
+              <th>Opening Price</th> 
+              <th>Closed Date</th> 
+              <th>Closing Price</th> 
+              <th>Profit</th>             
+              <th>Balance</th>             
+            </tr>
+          </thead>
+          <tr  data-ng-repeat="item in position.movements| reverseOrder">
+            <td>{{item.amount}}{{item.short|shortMarker}}</td>   
+            <td>{{item.openingDate}}</td>   
+            <td>{{item.openingPrice|currency}}</td>             
+            <td>{{item.closingDate}}</td>   
+            <td>{{item.closingPrice|currency}}</td> 
+            <td>{{item.profit|currency}}</td>   
+            <td>{{item.balance|currency}}</td>   
+          </tr> 
+        </table>
+
+
+        </div>  
+      </div>
+    </div>
+  </div>
+</div> 

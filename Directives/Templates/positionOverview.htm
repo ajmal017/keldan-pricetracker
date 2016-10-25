@@ -1,0 +1,54 @@
+﻿<div class="panel-group" >
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <div class=" pull-right btn-sm top-right no-border glyphicon glyphicon-minus-sign"  onclick="toggleVisibility('divPosition', this)" style="cursor: pointer"></div>
+      <h4 class="panel-title">Position</h4>
+    </div>
+
+    <div id="divPosition" class="panel-collapse  ">
+      <div class="panel-body">
+          <table class="table table-condensed ">
+            <tr data-ng-show="showGearing">
+              <td class="text-muted">Gearing</td><td>{{position.gearing}}:1</td>
+            </tr>            
+            <tr>
+              <td class="text-muted">Available</td><td>{{position.availableBalance|currency}}</td>
+            </tr>
+            <tr>
+              <td class="text-muted">Expected Profit</td><td>{{position.expectedProfit|currency}}</td>
+            </tr>                     
+          </table>
+          <button type="submit" class="btn btn-xs btn-warning pull-right" data-ng-click="position.closePosition()">Close Position</button>
+      </div>
+
+      <div class="panel-heading" data-ng-show="showStops">
+        <h4 class="panel-title">Trading Stops</h4>
+      </div>
+
+      <div id="divTradingStops" class="panel-collapse" data-ng-show="showStops">
+        <div class="panel-body">
+            <table class="table table-condensed ">
+              <tr >
+                <td class="text-muted">Max Profit</td>
+                <td >
+                  <input class="form-control" data-ng-model="position.profitStop" data-ng-hide="isRunning" />
+                  <span  data-ng-show="isRunning" >{{position.profitStop|currency}}</span>
+                </td>
+              </tr>          
+              <tr >
+                <td class="text-muted">Max Loss</td>
+                <td >
+                  <input class="form-control" data-ng-model="position.lossStop" data-ng-hide="isRunning" />
+                  <span  data-ng-show="isRunning" >{{position.lossStop|currency}}</span>
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div> 

@@ -1,0 +1,26 @@
+﻿<div class="panel-group" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class=" pull-right btn-sm top-right no-border glyphicon glyphicon-minus-sign"  onclick="toggleVisibility('divOpenSales', this)" style="cursor: pointer"></div>
+      <h4 class="panel-title">Open Sales</h4>
+    </div>
+    <div id="divOpenSales" class="panel-collapse  ">
+      <div class="panel-body">
+        <table class="table table-condensed " >              
+          <thead  >
+            <tr>
+            <th>&nbsp;</th> 
+            <th>Amount</th> 
+            <th>Opening Price</th> 
+            </tr>
+          </thead>
+          <tr  data-ng-repeat="item in position.sales">
+            <td>{{item.short|shortMarker}}</td> 
+            <td>{{item.amount}}</td> 
+            <td>{{item.openingPrice|currency}}</td>
+          </tr> 
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 

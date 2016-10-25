@@ -1,0 +1,43 @@
+﻿.HistoryChart {
+    background-color: #fff;
+}
+
+.HistoryArea {
+    stroke: none;
+    stroke-width: 0;
+    fill: #d5e2ed;
+}
+
+.HistoryBack {
+    stroke: none;
+    stroke-width: 0;
+    fill: #fff;
+}
+
+.HistoryLine {
+    stroke: #428BCA;
+    stroke-width: 3;
+    fill: none;
+}
+
+.HistoryBorder {
+    stroke: #428BCA;
+    stroke-width: 1;
+    fill: none;
+}
+
+circle {
+    stroke: #F0AD4E;
+    stroke-width: 2;
+    fill:   none;
+}
+  
+line {
+    stroke: black;
+}
+ 
+text {
+    font-family: Arial;
+    font-size: 9pt;
+    
+}

@@ -1,0 +1,15 @@
+﻿<div class="panel-group" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class=" pull-right btn-sm top-right no-border glyphicon glyphicon-minus-sign"  onclick="toggleVisibility('divShortTrades', this)" style="cursor: pointer"></div>
+      <h4 class="panel-title">Short Trades</h4>
+    </div>
+    <div id="divShortTrades" class="panel-collapse  ">
+      <div class="panel-body">
+        <div class="well" data-ng-repeat="item in position.shortTrades" style="display: inline-block; margin: 2px;">
+          <ui-position-card></ui-position-card>
+        </div>  
+      </div>
+    </div>
+  </div>
+</div> 
